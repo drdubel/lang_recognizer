@@ -1,3 +1,6 @@
+import sys
+
+
 def check_word(word, probs):
     lang_probs = [1, 1, 1, 1]
     for substr in [word[i : i + 2] for i in range(len(word) - 1)]:
@@ -24,8 +27,8 @@ pl: {4:%}
     )
 
 
-def main():
-    n = int(input())
+def main(indata):
+    n = int(next(indata))
     probs = {
         "aa": [0.6364, 0.0807, 0.1393, 0.1435],
         "ab": [0.2503, 0.2983, 0.2373, 0.2141],
@@ -690,10 +693,15 @@ def main():
     }
 
     for _ in range(n):
-        word = input()
+        word = next(indata)
         lang_probs = check_word(word, probs)
-        print(("de", "es", "en", "pl")[lang_probs.index(max(lang_probs))])
+        yield ("de", "es", "en", "pl")[lang_probs.index(max(lang_probs))]
+
+
+def run():
+    for line in main((line.rstrip() for line in sys.stdin)):
+        print(line)
 
 
 if __name__ == "__main__":
-    main()
+    run()

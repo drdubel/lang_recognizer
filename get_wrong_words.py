@@ -12,7 +12,7 @@ def read_dicts():
 
 
 def get_bad_words(words, probs, n=1000):
-    bad_words = []
+    matches = "    match word:\n"
     for lang in ["de", "es", "en", "pl"]:
         for i in range(n):
             word = random.choice(words[lang])
@@ -27,17 +27,27 @@ def get_bad_words(words, probs, n=1000):
             if lang != "pl" and word in words["pl"]:
                 continue
             if lang != res_lang:
-                bad_words.append(word)
-                print(
-                    f"Word: {word}\nTarget lang: {lang}\nPredicted lang: {res_lang}\n"
-                )
-    return bad_words
+                # print(
+                #    f"Word: {word}\nTarget lang: {lang}\nPredicted lang: {res_lang}\n"
+                # )
+                res = [0, 0, 0, 0]
+                if lang == "de":
+                    res[0] = 1
+                if lang == "es":
+                    res[1] = 1
+                if lang == "en":
+                    res[2] = 1
+                if lang == "pl":
+                    res[3] = 1
+                matches += f'        case "{word}":\n            return {res}\n'
+
+    return matches
 
 
 def main():
     words = read_dicts()
     probs = pickle.load(open("data/probs.pickle", "rb"))
-    print(get_bad_words(words, probs, n=100))
+    print(get_bad_words(words, probs, n=1000))
 
 
 if __name__ == "__main__":

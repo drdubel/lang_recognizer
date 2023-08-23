@@ -1,7 +1,5 @@
 import re
 
-from dicts import rep_rules
-
 
 def read_dicts():
     de = open("simp_de.txt").read().split()

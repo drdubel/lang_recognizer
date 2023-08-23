@@ -16,13 +16,15 @@ def count_substring(substr, de, es, en, pl):
     esc = len(re.findall(substr, "\n".join(es)))
     enc = len(re.findall(substr, "\n".join(en)))
     plc = len(re.findall(substr, "\n".join(pl)))
-    return (dec, esc, enc, plc)
+    langsc = (dec, esc, enc, plc)
+    return langsc
 
 
 def main():
     langs = read_dicts()
     while True:
-        print("de: %s\nes: %s\nen: %s\npl: %s\n", *count_substring(input("substring: "), *langs))
+        langsc = count_substring(input("substring: "), *langs)
+        print("de: {}\nes: {}\nen: {}\npl: {}\n".format(*langsc))
 
 
 if __name__ == "__main__":

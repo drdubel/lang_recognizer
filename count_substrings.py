@@ -62,6 +62,14 @@ def main():
             "ship$",
             "age$",
             "ery$",
+            "ski$",
+            "heit$",
+            "keit$",
+            "nis$",
+            "ity$",
+            "ing$",
+            "ship$",
+            "tiv$",
         ]
         + [i + j for i in ascii_lowercase for j in ascii_lowercase]
         + [i + j + "$" for i in ascii_lowercase + "^" for j in ascii_lowercase]

@@ -18,9 +18,9 @@ def generate_test(langs, i):
         words += random.choice(langs[lang]) + "\n"
         res += lang + "\n"
     with open(f"tests/test{i}.in", "w") as f:
-        f.writelines(str(n) + "\n" + words)
+        f.writelines(str(n) + "\n" + words[:-1])
     with open(f"tests/test{i}.out", "w") as f:
-        f.writelines(res)
+        f.writelines(res[:-1])
 
 
 def main():

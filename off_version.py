@@ -27,8 +27,8 @@ pl: {4:%}
     )
 
 
-def main(indata):
-    n = int(next(indata))
+def main():
+    n = int(sys.stdin.readline().strip())
     probs = {
         "aa": [0.6364, 0.0807, 0.1393, 0.1435],
         "ab": [0.2503, 0.2983, 0.2373, 0.2141],
@@ -693,15 +693,10 @@ def main(indata):
     }
 
     for _ in range(n):
-        word = next(indata)
+        word = sys.stdin.readline().strip()
         lang_probs = check_word(word, probs)
-        yield ("de", "es", "en", "pl")[lang_probs.index(max(lang_probs))]
-
-
-def run():
-    for line in main((line.rstrip() for line in sys.stdin)):
-        print(line)
+        print(("de", "es", "en", "pl")[lang_probs.index(max(lang_probs))])
 
 
 if __name__ == "__main__":
-    run()
+    main()

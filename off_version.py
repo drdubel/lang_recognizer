@@ -12,22 +12,24 @@ def check_word(word, probs):
         for langc in lang_probs
     ]
     for k in range(len(word)):
+        if len(word) - k >= 2:
+            lang_probs = [i * j for i, j in zip(probs[word[k : k + 2]], lang_probs)]
         if len(word) - k == 2:
             if word[k : k + 2] + "$" in probs:
                 lang_probs = [
                     i * j for i, j in zip(probs[word[k : k + 2] + "$"], lang_probs)
                 ]
-        elif len(word) - k == 3:
+        if len(word) - k == 3:
             if word[k : k + 3] + "$" in probs:
                 lang_probs = [
                     i * j for i, j in zip(probs[word[k : k + 3] + "$"], lang_probs)
                 ]
-        elif len(word) - k == 4:
+        if len(word) - k == 4:
             if word[k : k + 4] + "$" in probs:
                 lang_probs = [
                     i * j for i, j in zip(probs[word[k : k + 4] + "$"], lang_probs)
                 ]
-        elif k == 0:
+        if k == 0:
             if len(word) >= 4:
                 if "^" + word[0:4] in probs:
                     lang_probs = [
@@ -43,8 +45,6 @@ def check_word(word, probs):
                     lang_probs = [
                         i * j for i, j in zip(probs["^" + word[0:2]], lang_probs)
                     ]
-        elif len(word) - k >= 2:
-            lang_probs = [i * j for i, j in zip(probs[word[k : k + 2]], lang_probs)]
         lang_probs = [
             round(langc / sum(lang_probs), 4) if sum(lang_probs) else 0
             for langc in lang_probs

@@ -53,6 +53,16 @@ def main():
     substrs = (
         list(ascii_lowercase)
         + [
+            "ble$",
+            "oso$",
+            "ezna$",
+            "ezno$",
+            "ana$",
+            "aca$",
+            "aco$",
+            "ano$",
+            "eco$",
+            "eca$",
             "tion$",
             "ity$",
             "ness$",
@@ -71,7 +81,7 @@ def main():
             "ship$",
             "tiv$",
         ]
-        + [i + j for i in ascii_lowercase for j in ascii_lowercase]
+        + [i + j for i in ascii_lowercase + "^" for j in ascii_lowercase + "$"]
         + [i + j + "$" for i in ascii_lowercase + "^" for j in ascii_lowercase]
         + ["^" + i + j for i in ascii_lowercase for j in ascii_lowercase + "$"]
     )

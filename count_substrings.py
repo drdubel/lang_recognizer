@@ -44,12 +44,29 @@ pl: {4:%} - {8}
                     substr, *langpercs, *langcs
                 )
             )
-        yield (substr, langpercs)
+        if sum(langpercs) != 0:
+            yield (substr, langpercs)
 
 
 def main():
     langs, lens = read_dicts()
-    substrs = [i + j for i in ascii_lowercase + "^" for j in ascii_lowercase + "$"]
+    substrs = (
+        list(ascii_lowercase)
+        + [
+            "tion$",
+            "ity$",
+            "ness$",
+            "ism$",
+            "ment$",
+            "ant$",
+            "ship$",
+            "age$",
+            "ery$",
+        ]
+        + [i + j for i in ascii_lowercase for j in ascii_lowercase]
+        + [i + j + "$" for i in ascii_lowercase + "^" for j in ascii_lowercase]
+        + ["^" + i + j for i in ascii_lowercase for j in ascii_lowercase + "$"]
+    )
     probs = dict(tuple(count_substrings(substrs, langs, lens, debug=True)))
     with open("data/probs.pickle", "wb") as f:
         pickle.dump(probs, f)

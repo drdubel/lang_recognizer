@@ -18,10 +18,10 @@ def read_dicts():
 
 def count_substring(substr, de, es, en, pl, lde, les, lenn, lpl):
     sum_len = sum([lde, les, lenn, lpl])
-    dec = len(re.findall(substr, "\n".join(de))) / (lde / sum_len * 100)
-    esc = len(re.findall(substr, "\n".join(es))) / (les / sum_len * 100)
-    enc = len(re.findall(substr, "\n".join(en))) / (lenn / sum_len * 100)
-    plc = len(re.findall(substr, "\n".join(pl))) / (lpl / sum_len * 100)
+    dec = len(re.findall(substr, "\n".join(de), re.MULTILINE)) / (lde / sum_len * 100)
+    esc = len(re.findall(substr, "\n".join(es), re.MULTILINE)) / (les / sum_len * 100)
+    enc = len(re.findall(substr, "\n".join(en), re.MULTILINE)) / (lenn / sum_len * 100)
+    plc = len(re.findall(substr, "\n".join(pl), re.MULTILINE)) / (lpl / sum_len * 100)
     return (dec, esc, enc, plc)
 
 
@@ -49,11 +49,14 @@ pl: {4:%} - {8}
 
 def main():
     langs, lens = read_dicts()
-    substrs = [i + j for i in ascii_lowercase for j in ascii_lowercase]
+    substrs = [i + j for i in ascii_lowercase + "^" for j in ascii_lowercase + "$"]
     probs = dict(tuple(count_substrings(substrs, langs, lens, debug=True)))
     with open("data/probs.pickle", "wb") as f:
         pickle.dump(probs, f)
     print(probs)
+    # while True:
+    #    substr = input("give substring: ")
+    #    probs = dict(tuple(count_substrings([substr], langs, lens, debug=True)))
 
 
 if __name__ == "__main__":

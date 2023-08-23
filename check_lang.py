@@ -28,10 +28,9 @@ pl: {4:%}
 
 
 def main():
-    n = int(input())
     probs = pickle.load(open("data/probs.pickle", "rb"))
 
-    for _ in range(n):
+    while True:
         word = input("Give word: ")
         lang_probs = check_word(word, probs)
         print(("de", "es", "en", "pl")[lang_probs.index(max(lang_probs))])

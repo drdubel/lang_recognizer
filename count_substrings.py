@@ -112,7 +112,7 @@ def main():
         + [i + j for i in ascii_lowercase + "^" for j in ascii_lowercase + "$"]
         + [i + j + "$" for i in ascii_lowercase + "^" for j in ascii_lowercase]
         + ["^" + i + j for i in ascii_lowercase for j in ascii_lowercase + "$"],
-    )
+    )[0]
     probs = dict(tuple(count_substrings(substrs, langs, lens, debug=True)))
     with open("data/probs.pickle", "wb") as f:
         pickle.dump(probs, f)

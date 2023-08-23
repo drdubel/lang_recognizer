@@ -1,5 +1,6 @@
 *
 !*.py
 !*.dic
-!.gitignore
+!*.md
 !*/
+!.gitignore

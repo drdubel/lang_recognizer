@@ -17,11 +17,10 @@ def read_dicts():
 
 
 def count_substring(substr, de, es, en, pl, lde, les, lenn, lpl):
-    sum_len = sum([lde, les, lenn, lpl])
-    dec = len(re.findall(substr, "\n".join(de), re.MULTILINE)) / (lde / sum_len * 100)
-    esc = len(re.findall(substr, "\n".join(es), re.MULTILINE)) / (les / sum_len * 100)
-    enc = len(re.findall(substr, "\n".join(en), re.MULTILINE)) / (lenn / sum_len * 100)
-    plc = len(re.findall(substr, "\n".join(pl), re.MULTILINE)) / (lpl / sum_len * 100)
+    dec = len(re.findall(substr, "\n".join(de), re.MULTILINE))
+    esc = len(re.findall(substr, "\n".join(es), re.MULTILINE))
+    enc = len(re.findall(substr, "\n".join(en), re.MULTILINE))
+    plc = len(re.findall(substr, "\n".join(pl), re.MULTILINE)) / 7
     return (dec, esc, enc, plc)
 
 

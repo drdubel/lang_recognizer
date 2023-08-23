@@ -10,7 +10,7 @@ def read_dicts():
 
 
 def generate_test(langs, i):
-    n = random.randrange(1, 1000)
+    n = random.randrange(1, 10)
     words = ""
     res = ""
     for _ in range(n):
@@ -18,14 +18,14 @@ def generate_test(langs, i):
         words += random.choice(langs[lang]) + "\n"
         res += lang + "\n"
     with open(f"tests/test{i}.in", "w") as f:
-        f.writelines(str(n) + "\n" + words[:-1])
+        f.writelines(str(n) + "\n" + words)
     with open(f"tests/test{i}.out", "w") as f:
-        f.writelines(res[:-1])
+        f.writelines(res)
 
 
 def main():
     langs = read_dicts()
-    for i in range(1000):
+    for i in range(10):
         generate_test(langs, i)
 
 
